@@ -10,3 +10,5 @@ export const ItemList = ({item}) => {
 		}
 	</>
 } 
+
+module.export = ItemList;
