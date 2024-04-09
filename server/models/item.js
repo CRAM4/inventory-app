@@ -1,26 +1,21 @@
 const { db, Sequelize, DataTypes, Model } = require('../db');
  
-const Items = db.define ('Items',{
+const Item = db.define ('Item',{
     Name: {
         type: DataTypes.STRING,
-        allowNull: false
     },
     Description: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING,  
     },
     Price: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,   
     },
     Category: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,    
     },
     Image: {
         type: DataTypes.STRING,
-        allowNull: false
     },
 }, {});
  
-module.exports = { Items }
+module.exports = { Item }

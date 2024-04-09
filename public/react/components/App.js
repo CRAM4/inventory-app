@@ -27,7 +27,7 @@ export const App = () => {
 		<main>	
       <h1>Sauce Store</h1>
 			<h2>All things 🔥</h2>
-			<SaucesList sauces={sauces} />
+			<ItemList items={sauces} />
 		</main>
 	)
 }
