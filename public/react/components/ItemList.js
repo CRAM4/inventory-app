@@ -1,12 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Item } from './item';
 
 export const ItemList = ({ items }) => {
-	const [isClicked, setIsClick] = useState(false) 
-
-	const handleClick =() => {
-		setIsClicked(!isClicked)
-	}
 	
 	return <>
 		{
