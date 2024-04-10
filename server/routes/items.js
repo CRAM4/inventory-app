@@ -38,9 +38,9 @@ router.delete("/:id", async (req, res, next) => {
     const item = await Item.findByPk(req.params.id)
     if (item){
       await item.destroy()
-      res.send({messege:"item deleted"})
+      res.send({message:"item deleted"})
     } else{
-      res.status(404).send({messege:"item not found"})
+      res.status(404).send({message:"item not found"})
     }
   }catch (error) {
     next(error);

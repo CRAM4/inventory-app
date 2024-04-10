@@ -2,10 +2,27 @@ import React, { useState } from 'react';
 
 export const Item = (props) => {
   const [isClicked, setIsClicked] = useState(false) 
-
+ 
+  //this handles the ability to click on one item and bring up one picture of specific item. 
 	const handleClick =() => {
 		setIsClicked(!isClicked)
 	}
+
+  //This handles deleting an item when button is clicked
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/items/${props.item.id}`, {
+        method: 'DELETE',
+      });
+      if(!(response.status >= 200 && response.status < 300)) {
+        throw new Error('HTTP ERROR' + response.status)
+      }
+      props.onDelete(props.item.id);
+    } catch (error) {
+      console.error('error deleting item', error);
+    }
+}
+
 
   return (
   <>
@@ -19,7 +36,7 @@ export const Item = (props) => {
         <p>{props.item.description}</p>
         <p>${props.item.price}</p>
         <p>{props.item.category}</p>
-        <button>delete</button>
+        <button onClick = {handleDelete}>Delete</button>
         </div>
       )}
   </>
