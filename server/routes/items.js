@@ -32,4 +32,19 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+// Delete an item
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const item = await Item.findByPk(req.params.id)
+    if (item){
+      await item.destroy()
+      res.send({messege:"item deleted"})
+    } else{
+      res.status(404).send({messege:"item not found"})
+    }
+  }catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

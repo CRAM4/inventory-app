@@ -19,6 +19,7 @@ export const Item = (props) => {
         <p>{props.item.description}</p>
         <p>${props.item.price}</p>
         <p>{props.item.category}</p>
+        <button>delete</button>
         </div>
       )}
   </>
