@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ItemList } from './ItemList';
+import Form from './Form';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
@@ -27,6 +28,7 @@ export const App = () => {
 		<main>	
       <h1>Item Store</h1>
 			<h2>All things 🔥</h2>
+			<Form fetchItems={fetchItems} />
 			<ItemList items={items} />
 		</main>
 	)

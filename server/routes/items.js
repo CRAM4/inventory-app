@@ -22,4 +22,14 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+// Adds a new item
+router.post("/", async (req, res, next) => {
+  try {
+    const newItem = await Item.create(req.body);
+    res.send(newItem);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
