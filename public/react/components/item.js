@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 export const Item = (props) => {
   const [isClicked, setIsClicked] = useState(false) 
+  const [isEditing, setIsEditing] = useState(false)
+  const [updatedItem, setUpdatedItem] = useState({})
  
   //this handles the ability to click on one item and bring up one picture of specific item. 
 	const handleClick =() => {
@@ -23,6 +25,25 @@ export const Item = (props) => {
     }
 }
 
+  const handleUpdate = async () => {
+    try {
+      const response = await fetch(`/api/items/${props.item.id}`, {
+        method: 'UPDATE',
+        header: {
+          'Content-Type': 'application.json', 
+        },
+        body: JSON.stringify(updateItem),
+      });
+      if(!response.ok){
+        throw new Error('HTTP error ' + response.status)
+      }
+      const data = await response.json()
+      props.onUpdate(props.data.item)
+      setIsEditing(false)
+    } catch (error) {
+      console.error('error update item', error);
+    }
+  }
 
   return (
   <>
