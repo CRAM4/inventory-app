@@ -47,4 +47,21 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+
+// put request that updates the item list after deleting an item.
+router.put("/:id", async (req, res, next) => {
+    try {
+        const item = await Item.findByPk(req.params.id);
+        if(item) {
+          // update the item with the data in req.body
+            await item.update(req.body);
+            res.send({ message: 'Item updated successfully', item});
+        } else {
+          res.status(404).send({ message: 'Item not found' });
+        }
+     } catch (error) {
+        next(error);
+    }
+}); 
+
 module.exports = router;
