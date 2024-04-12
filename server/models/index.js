@@ -5,6 +5,7 @@ const Sauce = sequelize.define("sauces", {
   name: Sequelize.STRING,
   image: Sequelize.STRING,
 });
+// + Defines the Item model
 const Item = sequelize.define("items", {
   name: Sequelize.STRING,
   description: Sequelize.STRING,
