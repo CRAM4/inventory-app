@@ -1,3 +1,5 @@
+// + Changed from SaucesList.js to ItemList.js
+
 import React from 'react';
 import { Item } from './item';
 
