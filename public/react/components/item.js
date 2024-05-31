@@ -42,6 +42,8 @@ export const Item = (props) => {
   }
 
   // + This function is called when the update button is clicked
+}
+//function to handle update operation 
   const handleUpdate = async () => {
     try {
       // + Send a PUT request to the server with the updated item data
@@ -49,7 +51,11 @@ export const Item = (props) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json', 
         },
+        body: JSON.stringify(updatedItem),
         body: JSON.stringify(updatedItem),
       });
       // + If the server responds with an error status, throw an error
@@ -60,6 +66,9 @@ export const Item = (props) => {
       const data = await response.json();
       props.onUpdate(data.item);
       // + Set isEditing to false to exit edit mode
+      setIsEditing(false);
+      const data = await response.json();//parsing data and storing in variable called data.
+      props.onUpdate(data.item);//calling the onUpdate function, passed as a prop, update item
       setIsEditing(false);
     } catch (error) {
       // + If an error occurs, log it to the console
@@ -83,6 +92,21 @@ export const Item = (props) => {
     // + Set the updatedItem state to the current item data
     setUpdatedItem(props.item);
   }
+  //function to handle input change events  
+  const handleInputChange = (event) => { 
+    setUpdatedItem({
+      ...updatedItem, 
+      [event.target.name]: event.target.value, //responsible for updating the value of a field.
+    });
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setUpdatedItem(props.item);/*setting updated item state to the current item 
+    (basically to make sure we're editing the item we selected to edit.)*/
+  }
+
+
 
   return (
   <>
@@ -119,8 +143,31 @@ export const Item = (props) => {
         <button onClick={handleEditClick}>Edit</button>
         </>
         )}
+      <div>
+        {isEditing ? (
+          <form>
+            <input name = "name" value = {updatedItem.name} onChange = {handleInputChange} />
+            <input name = "description" value = {updatedItem.description} onChange = {handleInputChange} />
+            <input name = "price" value = {updatedItem.price} onChange = {handleInputChange} />
+            <input name = "category" value = {updatedItem.category} onChange = {handleInputChange} />
+            <button onClick = {handleUpdate}>Save</button>
+          </form>
+        ) : ( 
+        <>
+          <img src={props.item.image} alt={props.item.name} />
+          <p>{props.item.description}</p>
+          <p>${props.item.price}</p>
+          <p>{props.item.category}</p>
+          <button onClick = {handleDelete}>Delete</button>
+          <button onClick = {handleEditClick}>Edit</button> 
+        </>
+        )}  
         </div>
       )}
     </>
   ) 
 }
+  </>
+  )
+}
+
