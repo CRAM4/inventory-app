@@ -1,3 +1,6 @@
+// + Changed file name from sauces to items
+// + This file defines the routes for the Item model
+
 const express = require("express");
 const router = express.Router();
 const { Item } = require("../models");
@@ -12,56 +15,56 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// Gets only 1 item.
+// + Gets only 1 item
 router.get("/:id", async (req, res, next) => {
   try {
+    // It tries to find an item in the database by its primary key (ID)
     const item = await Item.findByPk(req.params.id);
+    // The server responds with the found item
     res.send(item);
   } catch (error) {
     next(error);
   }
 });
 
-// Adds a new item
+// + Adds a new item
 router.post("/", async (req, res, next) => {
   try {
+    // It creates a new item in the database with the data in the request body
     const newItem = await Item.create(req.body);
+    // The server responds with the created item
     res.send(newItem);
   } catch (error) {
     next(error);
   }
 });
 
-// Delete an item
+// + Delete an item
 router.delete("/:id", async (req, res, next) => {
   try {
-    const item = await Item.findByPk(req.params.id)
-    if (item){
-      await item.destroy()
-      res.send({message:"item deleted"})
-    } else{
-      res.status(404).send({message:"item not found"})
-    }
-  }catch (error) {
+    // It tries to find an item in the database by its primary key (ID)
+    const item = await Item.findByPk(req.params.id);
+    // If the item is found, it's deleted from the database
+    await item.destroy();
+    // The server responds with the deleted item
+    res.send(item);
+  } catch (error) {
     next(error);
   }
 });
 
-
-// put request that updates the item list after deleting an item.
+// + Updates an item
 router.put("/:id", async (req, res, next) => {
-    try {
-        const item = await Item.findByPk(req.params.id);
-        if(item) {
-          // update the item with the data in req.body
-            await item.update(req.body);
-            res.send({ message: 'Item updated successfully', item});
-        } else {
-          res.status(404).send({ message: 'Item not found' });
-        }
-     } catch (error) {
-        next(error);
-    }
-}); 
+  try {
+    // It tries to find an item in the database by its primary key (ID)
+    const item = await Item.findByPk(req.params.id);
+    // If the item is found, it's updated with the data in the request body
+    await item.update(req.body);
+    // The server responds with the updated item
+    res.send(item);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

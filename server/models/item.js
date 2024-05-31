@@ -1,21 +1,15 @@
+// + This file was added which defines Item model for the database
+
+// + Import the necessary modules from the 'db' file
 const { db, Sequelize, DataTypes, Model } = require('../db');
- 
-const Item = db.define ('Item',{
-    Name: {
-        type: DataTypes.STRING,
-    },
-    Description: {
-        type: DataTypes.STRING,  
-    },
-    Price: {
-        type: DataTypes.INTEGER,   
-    },
-    Category: {
-        type: DataTypes.INTEGER,    
-    },
-    Image: {
-        type: DataTypes.STRING,
-    },
-}, {});
- 
-module.exports = { Item }
+
+// + Define the Item model with either ints or strings for each field
+const Item = db.define('Item', {
+    Name: DataTypes.STRING, 
+    Description: DataTypes.STRING, 
+    Price: DataTypes.INTEGER, 
+    Category: DataTypes.INTEGER, 
+    Image: DataTypes.STRING, 
+  }, {});
+
+module.exports = { Item };
