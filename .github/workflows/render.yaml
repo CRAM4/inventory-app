@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to Render
         uses: render/render-action@v1
         with:
-          token: ${{ secrets.RENDER_TOKEN }}
+          token: rnd_LbeZhuc5uMythp7qATvZJYx2S8ds
           name: your-app-name
           env: production
           build: dist
