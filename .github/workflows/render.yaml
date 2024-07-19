@@ -25,9 +25,6 @@ jobs:
         run: npm run build
 
       - name: Deploy to Render
-        uses: render/render-action@v1
-        with:
-          token: rnd_LbeZhuc5uMythp7qATvZJYx2S8ds
-          name: your-app-name
-          env: production
-          build: dist
+        run: ./deploy-to-render.sh
+        env:
+          RENDER_TOKEN: rnd_LbeZhuc5uMythp7qATvZJYx2S8ds
