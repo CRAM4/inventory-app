@@ -1,5 +1,7 @@
 const {Item, db} = require('../server/models/item');
 
+const {sequelize} = require('../server/db');
+
 
 const item = {
     name: 'Item Name',
@@ -11,7 +13,10 @@ const item = {
 
 //Unit tests that must pass before code could be pushed to main branch. Ensuring quality of code.
 describe  ('Item Model', () => {
-    beforeAll (async () => await Item.create(item));
+    beforeAll (async () => {
+        await sequelize.sync();
+        await Item.create(item);
+    });
 
     it('should have a name', () => {
         expect(typeof item.name).toBe('string');
