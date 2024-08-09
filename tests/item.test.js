@@ -4,11 +4,12 @@ const {Item, db} = require('../server/models/item');
 const item = {
     name: 'Item Name',
     description: 'Item Description',
-    price: 1100,
+    price: 500,
     category: 'Item Category',
     image: 'item.jpg',
 };
 
+//Unit tests that must pass before code could be pushed to main branch. Ensuring quality of code.
 describe  ('Item Model', () => {
     beforeAll (async () => await Item.create(item));
 
