@@ -5,6 +5,7 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const {check, validationResult} = require("express-validator");
 
 //Allow CORS requests
 app.use(cors());
@@ -31,6 +32,19 @@ app.use((error, req, res, next) => {
   if(res.statusCode < 400) res.status(500);
   res.send({error: error.message, name: error.name, message: error.message, table: error.table});
 });
+
+//server side validation
+app.post('/api/items', [check("items").not().isEmpty().trim()], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.json({errors: errors.array()});
+  } else {
+    items.push(req.body.items);
+    res.json({items});
+  }
+}); 
+
+
 
 module.exports = app;
 
